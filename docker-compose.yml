@@ -1,0 +1,27 @@
+services:
+  sandbox-image:
+    build:
+      context: .
+      dockerfile: Dockerfile.sandbox
+    image: nullvector-sandbox:latest
+    profiles:
+      - build-only
+
+  ide:
+    build:
+      context: .
+      dockerfile: Dockerfile.ide
+    image: nullvector-ide:latest
+    container_name: nullvector-ide
+    ports:
+      - "8080:8080"
+    environment:
+      - SANDBOX_MODE=docker
+      - SANDBOX_IMAGE=nullvector-sandbox:latest
+      - EXEC_TIMEOUT_SEC=6
+      - MAX_CODE_BYTES=32768
+      - MAX_OUTPUT_BYTES=65536
+    volumes:
+      # Required so the IDE server can spawn & destroy ephemeral sandbox containers
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped

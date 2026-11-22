@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULLVECTOR // Ephemeral Lisp Lab</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="crt-overlay" id="crtOverlay"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="badge">NULLVECTOR</span>
+      <span class="title">EPHEMERAL LISP LAB // ZERO PERSISTENCE</span>
+    </div>
+    <div class="controls">
+      <select id="exampleSelect" class="ctrl-select" title="Load classic Lisp example">
+        <option value="">-- EXAMPLES --</option>
+        <option value="hello">01. FIRST CONTACT</option>
+        <option value="factorial">02. FACTORIAL &amp; TAIL-REC</option>
+        <option value="ycomb">03. Y-COMBINATOR</option>
+        <option value="sicp_sqrt">04. SICP NEWTON SQRT</option>
+        <option value="church">05. CHURCH NUMERALS</option>
+      </select>
+      <button id="crtToggle" class="ctrl-btn" title="Toggle CRT scanlines">CRT: ON</button>
+      <button id="themeToggle" class="ctrl-btn" title="Switch Matrix Dark / Archive Paper Light">THEME: MATRIX</button>
+      <button id="clearBtn" class="ctrl-btn" title="Clear output (Ctrl+L)">CLEAR</button>
+      <button id="runBtn" class="ctrl-btn primary" title="Evaluate in ephemeral container (Ctrl+Enter)">[ EVAL ]</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="pane editor-pane">
+      <div class="pane-header">
+        <span>BUFFER: *SCRATCH.SCM*</span>
+        <span id="parenStatus" class="meta">PARENS: BALANCED</span>
+      </div>
+      <div class="editor-wrap">
+        <div class="gutter" id="gutter">1</div>
+        <textarea id="codeEditor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">;; NULLVECTOR // EPHEMERAL LISP LAB
+;; Press Ctrl+Enter (or Cmd+Enter) to evaluate in a throwaway container.
+
+(define (factorial n)
+  (if (<= n 1)
+      1
+      (* n (factorial (- n 1)))))
+
+(display "NULLVECTOR LISP SANDBOX ONLINE")
+(newline)
+(display "10! = ")
+(display (factorial 10))
+(newline)
+</textarea>
+      </div>
+    </section>
+
+    <section class="pane output-pane">
+      <div class="pane-header">
+        <span>CONSOLE // EPHEMERAL STDOUT</span>
+        <span id="execMeta" class="meta">IDLE</span>
+      </div>
+      <pre id="outputConsole" class="console">NULLVECTOR SANDBOX READY.
+ISOLATION: --network=none --read-only --cap-drop=ALL --rm
+AWAITING S-EXPRESSIONS...</pre>
+    </section>
+  </main>
+
+  <footer class="statusbar">
+    <span id="sandboxStatus">SANDBOX: CHECKING...</span>
+    <span>KEYS: [CTRL+ENTER] EVAL | [TAB] INDENT | [CTRL+L] CLEAR</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

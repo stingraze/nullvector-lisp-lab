@@ -1,0 +1,20 @@
+# Hardened, minimal MIT/GNU Scheme execution sandbox
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends mit-scheme && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    # Remove unnecessary binaries to minimize attack surface
+    rm -f /usr/bin/curl /usr/bin/wget /usr/bin/apt* /usr/bin/dpkg* || true
+
+# Create unprivileged user with no login shell and no home directory write access
+RUN groupadd -g 10001 lisp && \
+    useradd -u 10001 -g 10001 -M -s /usr/sbin/nologin lispuser
+
+USER 10001:10001
+WORKDIR /
+
+# Default entrypoint runs MIT/GNU Scheme in quiet batch mode reading from stdin
+ENTRYPOINT ["mit-scheme", "--quiet", "--batch-mode"]

@@ -2,6 +2,8 @@
 
 A minimalist, retro-futuristic browser IDE for **MIT/GNU Scheme** (MIT Lisp), inspired by the Matrix terminal aesthetic and 1960s–1980s MIT AI Lab / ITS Lisp Machines.
 
+![Project Screenshot](https://github.com/stingraze/nullvector-lisp-lab/blob/main/nullvector-lisp.png)
+
 ## Security & Isolation Architecture
 
 Every code evaluation spawns a **fresh, ephemeral Docker container** (`nullvector-sandbox:latest`) that is **destroyed immediately** (`--rm`) after execution completes or times out:

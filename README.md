@@ -1,6 +1,7 @@
 # NULLVECTOR // Ephemeral Lisp Lab
 
 A minimalist, retro-futuristic browser IDE for **MIT/GNU Scheme** (MIT Lisp), inspired by the Matrix terminal aesthetic and 1960s–1980s MIT AI Lab / ITS Lisp Machines.
+Created by Tsubasa Kato at Inspire Search Corp. using Perplexity Pro.
 
 ![Project Screenshot](https://github.com/stingraze/nullvector-lisp-lab/blob/main/nullvector-lisp.png)
 
